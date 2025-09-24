@@ -2,7 +2,6 @@ package conta_bancaria;
 
 import java.util.Scanner;
 
-import conta_bancaria.model.Conta;
 import conta_bancaria.model.ContaCorrente;
 import conta_bancaria.model.ContaPoupanca;
 import conta_bancaria.util.Cores;
@@ -14,7 +13,7 @@ public class Menu {
 		Scanner leia = new Scanner(System.in);
 
 		int opcao;
-		
+		 /*
 		//Instanciar objetos da Classe Conta
 		//Primeiro criar a variável que será o tipo do nosso obejto
 		//Conta é o tipo, c1 o nome e passamos os dados da minha conta (Aqueles que criamos como modelo dentro de Conta
@@ -48,7 +47,7 @@ public class Menu {
 		System.out.println("O saldo da conta eh: " + c2.getSaldo());
 		
 		c1.depositar(5000);
-		System.out.println("\nO saldo da conta eh: " + c1.getSaldo());
+		System.out.println("\nO saldo da conta eh: " + c1.getSaldo()); */
 		
 		//Instanciar objetos da Classe ContaCorrente e testando essa nova classe que é uma extensão de Conta
 		
@@ -77,6 +76,7 @@ public class Menu {
 		
 		System.out.println(cp1.sacar(200.00f));
 		cp1.visualizar();
+		
 		
 		while (true) {
 

@@ -1,6 +1,6 @@
 package conta_bancaria.model;
 
-public class Conta {
+public abstract class Conta {
 	//Atributos da Classe
 	private int numero;
 	private int agencia;
@@ -99,6 +99,6 @@ public class Conta {
 		System.out.printf("Titular da conta: %s%n", this.titular);
 		System.out.printf("Saldo da conta: %.2f%n", this.saldo);
 	}
-	
+		
 
 }
