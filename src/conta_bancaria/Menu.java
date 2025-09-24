@@ -69,6 +69,15 @@ public class Menu {
 		ContaPoupanca cp1 = new ContaPoupanca(14, 253, 2, "Carmen Campos", 800000.00f, 20);
 		cp1.visualizar();
 		
+		System.out.println(cp1.sacar(1000000));
+		System.out.println("O saldo da conta eh: " + cp1.getSaldo());
+		
+		cp1.depositar(5000);
+		System.out.println("\nO saldo da conta eh: " + cp1.getSaldo());
+		
+		System.out.println(cp1.sacar(200.00f));
+		cp1.visualizar();
+		
 		while (true) {
 
 			System.out.println(Cores.TEXT_PURPLE + Cores.ANSI_WHITE_BACKGROUND
