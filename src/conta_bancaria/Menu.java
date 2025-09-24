@@ -3,6 +3,7 @@ package conta_bancaria;
 import java.util.Scanner;
 
 import conta_bancaria.model.Conta;
+import conta_bancaria.model.ContaCorrente;
 import conta_bancaria.util.Cores;
 
 public class Menu {
@@ -47,6 +48,20 @@ public class Menu {
 		
 		c1.depositar(5000);
 		System.out.println("\nO saldo da conta eh: " + c1.getSaldo());
+		
+		//Instanciar objetos da Classe ContaCorrente e testando essa nova classe que é uma extensão de Conta
+		
+		ContaCorrente cc1 = new ContaCorrente(3, 456, 1, "Nívea Fogaça", 1000000.00f, 100000.00f);
+		cc1.visualizar();
+		
+		System.out.println(cc1.sacar(2000000.00f));
+		cc1.visualizar();
+		
+		System.out.println(cc1.sacar(2000.00f));
+		cc1.visualizar();
+		
+		cc1.depositar(5000.00f); //Não usamos o print porque ele é método void (Vazio, não retorna valor! Ele vai fazer e não vai te devolver nada. Diferente do método sacar que é um boolean, ou retorna que deu certo ou que não deu)
+		cc1.visualizar();
 		
 		while (true) {
 
