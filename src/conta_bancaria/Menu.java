@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import conta_bancaria.model.Conta;
 import conta_bancaria.model.ContaCorrente;
+import conta_bancaria.model.ContaPoupanca;
 import conta_bancaria.util.Cores;
 
 public class Menu {
@@ -62,6 +63,11 @@ public class Menu {
 		
 		cc1.depositar(5000.00f); //Não usamos o print porque ele é método void (Vazio, não retorna valor! Ele vai fazer e não vai te devolver nada. Diferente do método sacar que é um boolean, ou retorna que deu certo ou que não deu)
 		cc1.visualizar();
+		
+		//Instanciar objetos da Classe ContaPoupanca e testando a nossa classe que é outra extensão de Conta
+		
+		ContaPoupanca cp1 = new ContaPoupanca(14, 253, 2, "Carmen Campos", 800000.00f, 20);
+		cp1.visualizar();
 		
 		while (true) {
 
