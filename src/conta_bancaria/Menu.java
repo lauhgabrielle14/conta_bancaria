@@ -21,6 +21,7 @@ public class Menu {
 	public static void main(String[] args) {
 
 		int opcao;
+		
 		/*
 		 * //Instanciar objetos da Classe Conta //Primeiro criar a variável que será o
 		 * tipo do nosso obejto //Conta é o tipo, c1 o nome e passamos os dados da minha
@@ -85,6 +86,7 @@ public class Menu {
 		 * 
 		 * System.out.println(cp1.sacar(200.00f)); cp1.visualizar();
 		 */
+		
 		criarContasTeste();
 		
 		while (true) {
