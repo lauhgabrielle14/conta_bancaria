@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import conta_bancaria.controller.ContaController;
+import conta_bancaria.model.Conta;
 import conta_bancaria.model.ContaCorrente;
 import conta_bancaria.model.ContaPoupanca;
 import conta_bancaria.util.Cores;
@@ -17,11 +18,13 @@ public class Menu {
 	// não será modificado, assim como quando criamos
 	// constante)
 	private static final ContaController contaController = new ContaController();
-	//Instanciamos um objeto do tipo conta controller e a partir disso temos acessos a todos os métodos que existem em ContaController
+
+	// Instanciamos um objeto do tipo conta controller e a partir disso temos
+	// acessos a todos os métodos que existem em ContaController
 	public static void main(String[] args) {
 
 		int opcao;
-		
+
 		/*
 		 * //Instanciar objetos da Classe Conta //Primeiro criar a variável que será o
 		 * tipo do nosso obejto //Conta é o tipo, c1 o nome e passamos os dados da minha
@@ -56,9 +59,9 @@ public class Menu {
 		 * c1.getSaldo());
 		 */
 
-		/* CRIAMOS CONTA CORRENTE E CONTA POUPANÇA
-		 * // Instanciar objetos da Classe ContaCorrente e testando essa nova classe que
-		 * é // uma extensão de Conta
+		/*
+		 * CRIAMOS CONTA CORRENTE E CONTA POUPANÇA // Instanciar objetos da Classe
+		 * ContaCorrente e testando essa nova classe que é // uma extensão de Conta
 		 * 
 		 * ContaCorrente cc1 = new ContaCorrente(3, 456, 1, "Nívea Fogaça", 1000000.00f,
 		 * 100000.00f); cc1.visualizar();
@@ -86,12 +89,12 @@ public class Menu {
 		 * 
 		 * System.out.println(cp1.sacar(200.00f)); cp1.visualizar();
 		 */
-		
+
 		criarContasTeste();
-		
+
 		while (true) {
 
-			System.out.println(Cores.TEXT_PURPLE + Cores.ANSI_WHITE_BACKGROUND
+			System.out.println(Cores.TEXT_PURPLE + Cores.ANSI_BLACK_BACKGROUND
 					+ "*****************************************************");
 			System.out.println("                                                     ");
 			System.out.println("                    BANCO DA SAPI                    ");
@@ -133,36 +136,40 @@ public class Menu {
 
 			switch (opcao) {
 			case 1:
-				System.out.println(Cores.TEXT_BLACK + "Criar Conta\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Criar Conta\n\n");
+				cadastrarConta();
 				keyPress();
 				break;
 			case 2:
-				System.out.println(Cores.TEXT_BLACK + "Listar todas as Contas\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Listar todas as Contas\n\n");
 				listarContas();
 				keyPress();
 				break;
 			case 3:
-				System.out.println(Cores.TEXT_BLACK + "Consultar dados da Conta - por número\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Consultar dados da Conta - por número\n\n");
+				procurarContaPorNumero();
 				keyPress();
 				break;
 			case 4:
-				System.out.println(Cores.TEXT_BLACK + "Atualizar dados da Conta\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Atualizar dados da Conta\n\n");
+				atualizarConta();
 				keyPress();
 				break;
 			case 5:
-				System.out.println(Cores.TEXT_BLACK + "Apagar a Conta\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Apagar a Conta\n\n");
+				deletarConta();
 				keyPress();
 				break;
 			case 6:
-				System.out.println(Cores.TEXT_BLACK + "Saque\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Saque\n\n");
 				keyPress();
 				break;
 			case 7:
-				System.out.println(Cores.TEXT_BLACK + "Depósito\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Depósito\n\n");
 				keyPress();
 				break;
 			case 8:
-				System.out.println(Cores.TEXT_BLACK + "Transferência entre Contas\n\n");
+				System.out.println(Cores.TEXT_WHITE + "Transferência entre Contas\n\n");
 				keyPress();
 				break;
 			default:
@@ -179,18 +186,153 @@ public class Menu {
 		System.out.println("https://github.com/lauhgabrielle14");
 		System.out.println("*********************************************************");
 	}
-	//Criamos esse método para ele parar de exibir o menu sem deixar o usuário ler, nele só continua quando o usuário der um Enter
+
+	// Criamos esse método para ele parar de exibir o menu sem deixar o usuário ler,
+	// nele só continua quando o usuário der um Enter
 	public static void keyPress() {
 		System.out.println(Cores.TEXT_RESET + "\nPressione Enter para continuar...");
 		leia.nextLine();
 	}
-	//Criamos um método e dentro dele nós trouxemos o método cadastrar de ContaController
+
+	// Criamos um método e dentro dele nós trouxemos o método cadastrar de
+	// ContaController
 	private static void criarContasTeste() {
-		contaController.cadastrar(new ContaCorrente(1, 456, 1, "Nívea Fogaça", 1000000.00f, 100000.00f));
-		contaController.cadastrar(new ContaPoupanca(14, 253, 2, "Carmen Campos", 800000.00f, 20));
+		contaController.cadastrar(
+				new ContaCorrente(contaController.gerarNumero(), 456, 1, "Nívea Fogaça", 1000000.00f, 100000.00f));
+		contaController
+				.cadastrar(new ContaPoupanca(contaController.gerarNumero(), 253, 2, "Carmen Campos", 800000.00f, 20));
 	}
-	//Apenas criamos um método para listarmos as contas usando o método listar de ContaController
+
+	// Apenas criamos um método para listarmos as contas usando o método listar de
+	// ContaController
 	private static void listarContas() {
 		contaController.listarTodas();
+	}
+
+	// Agora vamos adicionar o método para cadastro
+	private static void cadastrarConta() {
+		System.out.print("Digite o número da Agência: ");
+		int agencia = leia.nextInt();
+
+		System.out.print("Digite o nome do Titular: ");
+		leia.skip("\\R");
+		String titular = leia.nextLine();
+
+		System.out.print("Digite o Tipo da conta (1 - CC | 2 - CP ): ");
+		int tipo = leia.nextInt();
+
+		System.out.print("Digite o Saldo inicial: ");
+		float saldo = leia.nextFloat();
+
+		switch (tipo) {
+		case 1 -> {
+			System.out.print("Digite o Limite inicial: ");
+			float limite = leia.nextFloat();
+			leia.nextLine();
+			contaController
+					.cadastrar(new ContaCorrente(contaController.gerarNumero(), agencia, tipo, titular, saldo, limite));
+		}
+		case 2 -> {
+			System.out.print("Digite o Aniversário da conta: ");
+			int aniversario = leia.nextInt();
+			leia.nextLine();
+			contaController.cadastrar(
+					new ContaPoupanca(contaController.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+		}
+		default -> System.out.println(Cores.TEXT_RED + "Tipo de conta inválido!" + Cores.TEXT_RESET);
+		}
+	}
+
+	private static void procurarContaPorNumero() {
+
+		System.out.print("Digite o número da conta: ");
+		int numero = leia.nextInt();
+		leia.nextLine();
+
+		contaController.procutarPorNumero(numero);
+	}
+
+	private static void deletarConta() {
+
+		System.out.print("Digite o número da conta: ");
+		int numero = leia.nextInt();
+		leia.nextLine();
+
+		Conta conta = contaController.buscarNaCollection(numero);
+
+		if (conta != null) {
+			
+			System.out.print("\nTem certeza quue deseja excluir esta conta? (S/N): ");
+			String confirmacao = leia.nextLine();
+			
+			if (confirmacao.equalsIgnoreCase("S")) {
+				contaController.deletar(numero);
+			} else {
+				System.out.println("\nOperação cancelada!");
+			}
+			
+		} else {
+			System.out.printf("\nA conta número %d não foi encontrada!%n", numero);
+		}
+
+	}
+	
+	private static void atualizarConta() {
+		System.out.print("Digite o número da conta: ");
+		int numero = leia.nextInt();
+		leia.nextLine();
+
+		Conta conta = contaController.buscarNaCollection(numero);
+
+		if (conta != null) {
+			int agencia = conta.getAgencia();
+			String titular = conta.getTitular();
+			int tipo = conta.getTipo();
+			float saldo = conta.getSaldo();
+			
+			
+			System.out.printf("Agência atual: %d\nNova Agência (Pressione ENTER para manter o valor atual): ", agencia);
+			String entrada = leia.nextLine();
+			agencia = entrada.isEmpty() ? agencia : Integer.parseInt(entrada);
+			//If ternário (quando temos só duas condições. Antes da "?" é a condição, o que está depois é o que eu quero que faça
+			//Aqui estamos convertendo porque a ideia é não precisar criar uma variável para cada caso! :)
+			
+			System.out.printf("Titular atual: %s\nNovo Títular (Pressione ENTER para manter o nome atual):", titular);
+			entrada = leia.nextLine();
+			titular = entrada.isEmpty() ? titular : entrada;
+			
+
+			System.out.printf("Saldo atual: %.2f\nNovo Saldo (Pressione ENTER para manter o valor atual):", saldo);
+			entrada = leia.nextLine();
+			saldo = entrada.isEmpty() ? saldo : Float.parseFloat(entrada);
+			
+			
+			switch (tipo) {
+			case 1 -> {
+				//Casting: Converter um objeto para outro tipo de objeto (Conta -> Conta Corrente)
+				//Transforma Conta em Conta corrente
+				//Colocanco só conta.get não conseguimos encontrar o Get Limite
+				float limite = ((ContaCorrente) conta).getLimite();
+				
+				System.out.printf("Limite atual: %.2f\nNovo Limite (Pressione ENTER para manter o valor atual): ", limite);
+				entrada = leia.nextLine();
+				limite = entrada.isEmpty() ? limite : Float.parseFloat(entrada);
+				contaController.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
+			}
+			case 2 -> {
+				int aniversario = ((ContaPoupanca) conta).getAniversario();
+				
+				System.out.printf("Aniversário atual da conta: %d\nNovo Aniversário da conta (Pressione ENTER para manter o valor atual): ", aniversario);
+				entrada = leia.nextLine();
+				aniversario = entrada.isEmpty() ? aniversario : Integer.parseInt(entrada);
+				contaController.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario));
+			}
+			default -> System.out.println(Cores.TEXT_RED + "Tipo de conta inválido!" + Cores.TEXT_RESET);
+			}
+			
+		} else {
+			System.out.printf("\nA conta número %d não foi encontrada!%n", numero);
+		}
+
 	}
 }
