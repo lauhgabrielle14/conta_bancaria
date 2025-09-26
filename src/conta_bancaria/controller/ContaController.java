@@ -8,7 +8,7 @@ import conta_bancaria.repository.ContaRepository;
 
 public class ContaController implements ContaRepository {
 
-	// Criamos um ArrayList para as minhas contas
+	// Criamos um ArrayList para as contas
 	private List<Conta> listaContas = new ArrayList<Conta>();
 	int numero = 0;
 

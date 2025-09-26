@@ -89,7 +89,7 @@ public class Menu {
 		 * 
 		 * System.out.println(cp1.sacar(200.00f)); cp1.visualizar();
 		 */
-
+		//Criando conta 1 e 2 para testarmos
 		criarContasTeste();
 
 		while (true) {
