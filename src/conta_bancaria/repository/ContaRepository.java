@@ -9,6 +9,7 @@ public interface ContaRepository {
 	public void atualizar (Conta conta);
 	public void procutarPorNumero (int numero);
 	public void deletar (int numero);
+	public void listarPorTitular(String titular); //Isso não está no cookbook, estamos fazendo para o aprendizado
 	
 	//Métodos Bancários
 	public void sacar(int numero, float valor);
